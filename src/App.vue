@@ -1,47 +1,68 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import { ref, reactive, watch } from 'vue'
+
+const uItem = ref("");
+const uTime = ref("");
+
+let id = 0;
+
+let list = reactive([
+  {
+    id: id++,
+    item: "上班",
+    time: "all the time",
+    completeOrNot: false
+  }
+]);
+
+const addItem = () => {
+  list.push({
+    id: id++,
+    item: uItem.value,
+    time: uTime.value,
+    completeOrNot: false
+  });
+  uItem.value = "";
+  uTime.value = "";
+};
+
+const changeItem = id => {
+  for(let v of list) {
+    if (v.id === id) v.completeOrNot = !v.completeOrNot;
+  };
+};
+
+const delItem = id => list.splice(list.findIndex(v => v.id === id), 1);
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+    <input type="text" v-model="uItem" />
+    <input type="text" v-model="uTime" />
+    <input type="button" value="新增" @click="addItem" />
+  </div>
+  <ul>
+    <li v-for="item in list" :id="item.id" :class="item.completeOrNot && 'completeCls'">
+      <input type="checkbox" @click="changeItem(item.id)"/>
+      <span>{{item.item}}</span>
+      <span>{{item.time}}</span>
+      <input type="button" value="刪除" @click="delItem(item.id)" />
+    </li> 
+  </ul>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
+  
+  .completeCls {
+    text-decoration: line-through;
   }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
