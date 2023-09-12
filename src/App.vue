@@ -49,7 +49,7 @@ const delItem = id => list.splice(list.findIndex(v => v.id === id), 1);
   <ul>
     <li v-for="item in list" :key="item.id" :class="item.completeOrNot && 'completeCls'" class="itemCls">
       <input type="checkbox" @click="changeItem(item.id)"/>
-      <span class="mr-1">{{item.item}}</span>
+      <span>{{item.item}}</span>
       <span>{{item.time}}</span>
       <input type="button" value="刪除" @click="delItem(item.id)" />
     </li> 
