@@ -1,7 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive } from 'vue'
 
 const uItem = ref("");
 const uTime = ref("");
@@ -18,6 +18,8 @@ let list = reactive([
 ]);
 
 const addItem = () => {
+  if (uItem.value == "" || uTime.value == "") return;
+  
   list.push({
     id: id++,
     item: uItem.value,
@@ -45,7 +47,7 @@ const delItem = id => list.splice(list.findIndex(v => v.id === id), 1);
     <input type="button" value="新增" @click="addItem" />
   </div>
   <ul>
-    <li v-for="item in list" :id="item.id" :class="item.completeOrNot && 'completeCls'">
+    <li v-for="item in list" :key="item.id" :class="item.completeOrNot && 'completeCls'">
       <input type="checkbox" @click="changeItem(item.id)"/>
       <span>{{item.item}}</span>
       <span>{{item.time}}</span>
