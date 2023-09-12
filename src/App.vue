@@ -42,14 +42,14 @@ const delItem = id => list.splice(list.findIndex(v => v.id === id), 1);
 
 <template>
   <div>
-    <input type="text" v-model="uItem" />
-    <input type="text" v-model="uTime" />
+    <input type="text" v-model="uItem" placeholder="新增項目" />
+    <input type="text" v-model="uTime" placeholder="期限" />
     <input type="button" value="新增" @click="addItem" />
   </div>
   <ul>
-    <li v-for="item in list" :key="item.id" :class="item.completeOrNot && 'completeCls'">
+    <li v-for="item in list" :key="item.id" :class="item.completeOrNot && 'completeCls'" class="itemCls">
       <input type="checkbox" @click="changeItem(item.id)"/>
-      <span>{{item.item}}</span>
+      <span class="mr-1">{{item.item}}</span>
       <span>{{item.time}}</span>
       <input type="button" value="刪除" @click="delItem(item.id)" />
     </li> 
@@ -62,6 +62,10 @@ const delItem = id => list.splice(list.findIndex(v => v.id === id), 1);
     padding: 0;
     box-sizing: border-box;
     list-style: none;
+  }
+
+  .itemCls > * {
+    margin-right: 8px
   }
   
   .completeCls {
