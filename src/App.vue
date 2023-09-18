@@ -1,18 +1,13 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import List from './List.vue'
-import ToDoForm from './ToDoForm.vue'
-
-import { reactive } from 'vue'
-
-let list = reactive([]);
+// import Finall from './toDoList/Finall.vue'
+import Finall from './movieList/Finall.vue'
+import Test from './forTest/test.vue'
 
 </script>
 
 <template>
-  <ToDoForm :data="list" />
-  <List :data="list" />
+  <Finall /> 
+  <!-- <Test />-->
 </template>
 
 <style scoped>
