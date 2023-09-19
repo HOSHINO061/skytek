@@ -9,7 +9,7 @@ const dialogOpen = ref(false)
 
 const submit = async (input) => {
   result.value = {}
-  input.trim() && await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=626e1ee7&t=${input}`)
+  input.trim() && await fetch(`https://www.omdbapi.com/?apikey=626e1ee7&t=${input}`)
     .then((res) => res.json())
     .then((jsonObj) => result.value = jsonObj)
     .finally(() => hadSubmit.value = true)
