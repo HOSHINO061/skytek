@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @import './base.css';
+=======
+@import "./base.css";
+>>>>>>> e3b9cc4a916129f41b56794090101651aa05a5e6
 
 #app {
   max-width: 1280px;
